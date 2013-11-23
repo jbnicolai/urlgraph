@@ -1,0 +1,15 @@
+{
+  "name": "urlgraph",
+  "version": "0.0.0",
+  "description": "",
+  "main": "crawler.js",
+  "dependencies": {
+    "crawler": "~0.2.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}
