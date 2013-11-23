@@ -1,0 +1,15 @@
+.node {
+  stroke-width: 1.5px;
+  cursor: crosshair;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+  color: #023423;
+}
