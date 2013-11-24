@@ -2,7 +2,7 @@ var Crawler = require("crawler").Crawler;
 
 // options:
 var base = "http://essentials.xebia.com";
-var includeExternalLinks = false;
+var includeExternalLinks = true;
 
 // walk any edge connected to a vertex on the domain
 function shouldTraverseEdge (source, href) {
@@ -43,7 +43,11 @@ function onFetchPage (error, page, $) {
 }
 
 function onFinishCrawl () {
-  console.log(JSON.stringify(createD3jsObject()));
+  console.log("source,target" + (includeExternalLinks ? ",external" : ""));
+  for (var i in E) {
+    var e = E[i];
+    console.log(V[e.v1] + "," + V[e.v2] + (includeExternalLinks ? ("," + isLeaf(V[e.v2])) : ""));
+  }
   process.exit();
 }
 
@@ -54,39 +58,3 @@ var c = new Crawler({
 });
 
 c.queue(base);
-
-function createD3jsObject () {
-  // d3js expects:
-  // { "nodes": [{ name: "", group "" }], "links": [{ source: i, target i, value factor }]}
-  // group urls on the same domain
-  var d3js = { nodes: [], links: []};
-
-  for (var i in V) {
-    var v = V[i];
-    d3js.nodes.push({
-      name: v,
-      group: group(v)
-    });
-  }
-
-  for (var i in E) {
-    var e = E[i];
-    d3js.links.push({
-      source: e.v1,
-      target: e.v2,
-      left: false,
-      right: true
-    });
-  }
-
-  return d3js;
-}
-
-function group (uri) {
-  return uri.indexOf(base) === 0 ? 0 :
-    uri.indexOf("linkedin") !== -1 ? 1 :
-    uri.indexOf("facebook") !== -1 ? 2 :
-    uri.indexOf("plus.google") !== -1 ? 3 :
-    uri.indexOf("twitter") !== -1 ? 4 :
-    5;
-}

@@ -4,13 +4,13 @@ Fetch dependencies with:
 npm install
 
 Extract graph with:
-node crawler.js > graph.json
+node crawler.js > edges.csv
 
 Visualize with:
 python -m SimpleHTTPServer
 go to localhost:8000
 
-To test rename graph.json.example to graph.json
+To test rename edges.csv.example-internal to edges.csv
 
 
 
